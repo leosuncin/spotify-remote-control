@@ -1,9 +1,44 @@
 import { Block, Button, Text } from 'galio-framework';
 import React from 'react';
 import { Dimensions, ImageBackground, StyleSheet } from 'react-native';
+import * as AppAuth from 'expo-app-auth';
 
 const { height, width } = Dimensions.get('screen');
-const SignIn: React.FC = () => {
+const spotifyConfig: AppAuth.OAuthProps = {
+  issuer: 'https://accounts.spotify.com',
+  scopes: [
+    'user-read-playback-state',
+    'user-read-email',
+    'playlist-read-collaborative',
+    'user-modify-playback-state',
+    'user-read-private',
+    'playlist-modify-public',
+    'user-top-read',
+    'user-read-currently-playing',
+    'playlist-read-private',
+    'user-follow-read',
+    'user-read-recently-played',
+    'playlist-modify-private',
+    'user-library-read',
+  ],
+  clientId: process.env.SPOTIFY_CLIENT_ID,
+  redirectUrl: process.env.REDIRECT_URL,
+  serviceConfiguration: {
+    authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+    tokenEndpoint: 'https://accounts.spotify.com/api/token',
+  },
+};
+const SignIn = () => {
+  async function handleSignIn() {
+    console.info(spotifyConfig);
+    try {
+      const authState = await AppAuth.authAsync(spotifyConfig);
+      console.info(authState);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Block flex center>
       <ImageBackground
@@ -18,6 +53,7 @@ const SignIn: React.FC = () => {
             icon="spotify"
             size="large"
             color="success"
+            onPress={handleSignIn}
           >
             Sign in
           </Button>
