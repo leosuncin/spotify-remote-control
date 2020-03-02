@@ -1,19 +1,11 @@
+import { Block } from 'galio-framework';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import SignIn from 'screens/SignIn';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Block flex>
+      <SignIn />
+    </Block>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
