@@ -22,11 +22,10 @@ const spotifyConfig: AppAuth.OAuthProps = {
     'user-library-read',
   ],
   clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_SECRET,
   redirectUrl: AppAuth.getDefaultOAuthRedirect(),
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-    tokenEndpoint: 'https://accounts.spotify.com/api/token',
+    tokenEndpoint: process.env.REDIRECT_URL,
   },
 };
 const SignIn = () => {
