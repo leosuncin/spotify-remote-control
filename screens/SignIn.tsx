@@ -1,7 +1,7 @@
+import * as AppAuth from 'expo-app-auth';
 import { Block, Button, Text } from 'galio-framework';
 import React from 'react';
 import { Dimensions, ImageBackground, StyleSheet } from 'react-native';
-import * as AppAuth from 'expo-app-auth';
 
 const { height, width } = Dimensions.get('screen');
 const spotifyConfig: AppAuth.OAuthProps = {
@@ -22,7 +22,8 @@ const spotifyConfig: AppAuth.OAuthProps = {
     'user-library-read',
   ],
   clientId: process.env.SPOTIFY_CLIENT_ID,
-  redirectUrl: process.env.REDIRECT_URL,
+  clientSecret: process.env.SPOTIFY_SECRET,
+  redirectUrl: AppAuth.getDefaultOAuthRedirect(),
   serviceConfiguration: {
     authorizationEndpoint: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
